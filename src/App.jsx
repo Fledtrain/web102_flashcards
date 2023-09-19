@@ -10,8 +10,8 @@ function App() {
   return (
     <>
       <header>
-        <h1 className='text-4xl'>What Video Games character is this?</h1>
-        <h2>Lets test your video game knowledge!</h2>
+        <h1 className='text-4xl' >What Video Games character is this?</h1>
+        <h2 className=''>Lets test your video game knowledge!</h2>
       </header>
       <Card />
     </>
