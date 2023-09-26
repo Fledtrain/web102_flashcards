@@ -73,7 +73,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-image: url("background.webp");
+  background-image: url("background2.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -95,12 +95,16 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+button:active {
+  transform: scale(0.95);
 }
 
 @media (prefers-color-scheme: light) {

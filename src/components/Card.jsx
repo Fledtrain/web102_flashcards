@@ -56,7 +56,7 @@ const questions = [
 /**Component for displaying questions and answers 
  * @component
  * @param  {object} question 
- * @param  {function(): number} onNext Increment id by 1
+ * @param  {function(): number} onNext Increment id randomly
  * @param  {function(): number} onPrev Subtract id by 1
  */
 
@@ -71,13 +71,13 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped }) => {
                         ${question.difficulty === "hard" && "bg-red-800"}
                         ${question.difficulty === "medium" && "bg-purple-800"}
                         ${question.difficulty === "easy" && "bg-green-800"}
-                        border flex justify-center items-center h-96 w-96 m-auto p-5 active:bg-slate-500 
+                        border border-slate-900 flex justify-center items-center h-96 w-96 m-auto p-5 active:bg-slate-500 rounded-xl
                     `}
                     onClick={onFlip}
                 >
                     {isFlipped ?
                         <>
-                            <p>
+                            <p className="text-xl font-medium">
                                 {question.answer}
                             </p>
                         </> :
@@ -99,7 +99,13 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped }) => {
                 </div>
                 <div className="m-4">
                     {/* <button className="p-5 mr-2 hover:bg-slate-500 active:bg-slate-600 " onClick={onPrev}>Previous</button> */}
-                    <button className="p-5 ml-2 hover:bg-slate-500 active:bg-slate-600 " onClick={onNext}>Next</button>
+                    <button
+                        className={`
+                        ${question.difficulty === "hard" && "bg-red-800"}
+                        ${question.difficulty === "medium" && "bg-purple-800"}
+                        ${question.difficulty === "easy" && "bg-green-800"} 
+                        p-5 ml-2 active:bg-slate-500 font-semibold`}
+                        onClick={onNext}>Next</button>
                 </div>
             </section>
         </>
@@ -148,7 +154,7 @@ const Card = () => {
     }
     return (
         <>
-            <h2 className="text-slate-900">Number of FlashCards: {numOfCards}</h2>
+            <h2 className="text-slate-900 text-xl">Number of FlashCards: {numOfCards}</h2>
             <Questions
                 question={question[questionNum]}
                 onSetQuestion={setQuestion}
