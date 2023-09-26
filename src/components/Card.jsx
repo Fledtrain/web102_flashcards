@@ -71,7 +71,7 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped }) => {
                         ${question.difficulty === "hard" && "bg-red-800"}
                         ${question.difficulty === "medium" && "bg-purple-800"}
                         ${question.difficulty === "easy" && "bg-green-800"}
-                        border border-slate-900 flex justify-center items-center h-96 w-96 m-auto p-5 active:bg-slate-500 rounded-xl
+                        border border-slate-900 flex justify-center items-center h-96 w-72 sm:w-96  m-auto p-5 active:bg-slate-500 rounded-xl
                     `}
                     onClick={onFlip}
                 >

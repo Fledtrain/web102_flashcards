@@ -119,3 +119,20 @@ button:active {
     background-color: #f9f9f9;
   }
 }
+
+@media (max-width: 768px) {
+  section {
+    margin: 0 auto;
+    padding: 4px;
+    text-align: center;
+  }
+  #root {
+    padding: 4px;
+  }
+}
+@media (max-width: 500px) {
+  section {
+    padding: 0;
+  }
+
+}
