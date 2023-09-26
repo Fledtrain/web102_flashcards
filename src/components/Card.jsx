@@ -78,7 +78,7 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped }) => {
                     {isFlipped ? <><img src={question.img} alt="Test" /></> : question.question}
                 </div>
                 <div className="m-4">
-                    <button className="p-5 mr-2 hover:bg-slate-500 active:bg-slate-600 " onClick={onPrev}>Previous</button>
+                    {/* <button className="p-5 mr-2 hover:bg-slate-500 active:bg-slate-600 " onClick={onPrev}>Previous</button> */}
                     <button className="p-5 ml-2 hover:bg-slate-500 active:bg-slate-600 " onClick={onNext}>Next</button>
                 </div>
             </section>
@@ -101,8 +101,9 @@ const Card = () => {
         setIsFlipped(!isFlipped)
     }
     const numOfCards = question.length
+    console.log("Number of cards", numOfCards)
     // Creating a random number from 0 - 6
-    // const randomNum = Math.floor(Math.random() * question.length)
+    const randomNum = Math.floor(Math.random() * question.length)
 
     /** Increments Question Number
      * @returns {number}
@@ -112,6 +113,10 @@ const Card = () => {
             setQuestionNum(questionNum + 1)
             setIsFlipped(false)
         }
+        if (questionNum === numOfCards - 1) {
+            setQuestionNum(0)
+        }
+        console.log(randomNum)
     }
     /**Decrements Question Number
      * @returns {number} 

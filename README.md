@@ -4,7 +4,7 @@ Submitted by: Joey Whitehead
 
 This web app: Video Game Mystery Shuffle is a flashcard app that allows users to see if they are truly a Gamer!
 
-Time spent: 5 hours spent in total
+Time spent: 6 hours spent in total
 
 ## Required Features
 
