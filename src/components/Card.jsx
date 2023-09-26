@@ -53,12 +53,21 @@ const questions = [
     }
 ];
 
+/**
+ * Component for displaying questions and answers 
+ * 
+ * @component
+ * @param  {object} question 
+ * @param  {function(): number} onNext Increment id by 1
+ * @param  {function(): number} onPrev Subtract id by 1
+ */
+
 // Child Component
 const Questions = ({ question, onNext, onPrev }) => {
     // Using this to check if the card is flipped or not
     const [isFlipped, setIsFlipped] = useState(false);
 
-    const flipCard = (e) => {
+    const flipCard = () => {
         setIsFlipped(!isFlipped)
     }
 
@@ -67,8 +76,13 @@ const Questions = ({ question, onNext, onPrev }) => {
             <section className="mt-5 ">
                 <div
                     id={question.id}
-                    className={`border flex justify-center items-center h-96 w-96 m-auto p-5
-                    hover:bg-gray-800 active:bg-gray-900 `}
+                    className=
+                    {`
+                        ${question.difficulty === "hard" && "bg-red-800"}
+                        ${question.difficulty === "medium" && "bg-purple-800"}
+                        ${question.difficulty === "easy" && "bg-green-800"}
+                        border flex justify-center items-center h-96 w-96 m-auto p-5 active:bg-slate-500 
+                    `}
                     onClick={flipCard}
                 >
                     {isFlipped ? <><img src={question.img} alt="Test" /></> : question.question}
@@ -82,6 +96,10 @@ const Questions = ({ question, onNext, onPrev }) => {
     )
 }
 
+/**
+ * Component for displaying Card
+ * @component 
+ */
 
 // Parent Component
 const Card = () => {
@@ -90,22 +108,26 @@ const Card = () => {
     // Used to track the current question
     const [questionNum, setQuestionNum] = useState(0)
 
+    /** Increments Question Number
+     * @returns {number} 
+     */
     const nextCard = () => {
         if (questionNum < numOfCards - 1) {
             setQuestionNum(questionNum + 1)
         }
     }
-
+    /**Decrements Question Number
+     * @returns {number} 
+     */
     const prevCard = () => {
         if (questionNum > 0) {
             setQuestionNum(questionNum - 1)
         }
     }
-
     const numOfCards = question.length
     return (
         <>
-            <h2>Number of FlashCards: {numOfCards}</h2>
+            <h2 className="text-slate-900">Number of FlashCards: {numOfCards}</h2>
             <Questions
                 question={question[questionNum]}
                 onSetQuestion={setQuestion}
