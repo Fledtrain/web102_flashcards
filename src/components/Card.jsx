@@ -53,9 +53,7 @@ const questions = [
     }
 ];
 
-/**
- * Component for displaying questions and answers 
- * 
+/**Component for displaying questions and answers 
  * @component
  * @param  {object} question 
  * @param  {function(): number} onNext Increment id by 1
@@ -96,8 +94,7 @@ const Questions = ({ question, onNext, onPrev }) => {
     )
 }
 
-/**
- * Component for displaying Card
+/**Component for displaying Card
  * @component 
  */
 
