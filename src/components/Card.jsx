@@ -74,8 +74,8 @@ const Questions = ({ question, onNext, onPrev }) => {
                     {isFlipped ? <><img src={question.img} alt="Test" /></> : question.question}
                 </div>
                 <div className="m-4">
-                    <button className="p-5 mr-2" onClick={onPrev}>Previous</button>
-                    <button className="p-5 ml-2" onClick={onNext}>Next</button>
+                    <button className="p-5 mr-2 hover:bg-slate-500 active:bg-slate-600 " onClick={onPrev}>Previous</button>
+                    <button className="p-5 ml-2 hover:bg-slate-500 active:bg-slate-600 " onClick={onNext}>Next</button>
                 </div>
             </section>
         </>
