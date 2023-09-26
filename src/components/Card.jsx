@@ -36,7 +36,7 @@ const questions = [
     },
     {
         id: 5,
-        question: "Which 1993 first-person shooter game is known for popularizing the genre",
+        question: "Which 1993 first-person shooter game is known for popularizing the genre? 🔫",
         answer: "Doom",
         difficulty: "hard"
     },
@@ -49,60 +49,28 @@ const questions = [
 ];
 
 // Child Component
-const Questions = ({ question }) => {
+const Questions = ({ question, onNext, onPrev }) => {
     // Using this to check if the card is flipped or not
     const [isFlipped, setIsFlipped] = useState(false);
 
     const flipCard = (e) => {
-        console.log(e.target.id)
         setIsFlipped(!isFlipped)
-    }
-
-    const nextCard = () => {
-        console.log("next")
-    }
-    const prevCard = () => {
-        console.log("prev")
     }
 
     return (
         <>
-            <section className="mt-5">
+            <section className="mt-5 ">
                 <div
-                    id={question[0].id}
-                    className={` ${isFlipped ? "" : ""} border flex justify-center items-center h-96 w-96 m-auto p-5
+                    id={question.id}
+                    className={`border flex justify-center items-center h-96 w-96 m-auto p-5
                     hover:bg-gray-800 active:bg-gray-900 `}
                     onClick={flipCard}
                 >
-                    {isFlipped ? question[0].answer : question[0].question}
+                    {isFlipped ? question.answer : question.question}
                 </div>
-                <div
-                    id={question[1].id}
-                    className={` ${isFlipped ? "" : ""} hidden`}
-                    onClick={flipCard}>{isFlipped ? question[1].answer : question[1].question}</div>
-                <div
-                    id={question[2].id}
-                    className={` ${isFlipped ? "" : ""} hidden`}
-                    onClick={flipCard}>{isFlipped ? question[2].answer : question[2].question}</div>
-                <div
-                    id={question[3].id}
-                    className={` ${isFlipped ? "" : ""} hidden`}
-                    onClick={flipCard}>{isFlipped ? question[3].answer : question[3].question}</div>
-                <div
-                    id={question[4].id}
-                    className={` ${isFlipped ? "" : ""} hidden `}
-                    onClick={flipCard}>{isFlipped ? question[4].answer : question[4].question}</div>
-                <div
-                    id={question[5].id}
-                    className={` ${isFlipped ? "" : ""} hidden`}
-                    onClick={flipCard}>{isFlipped ? question[5].answer : question[5].question}</div>
-                <div
-                    id={question[6].id}
-                    className={` ${isFlipped ? "" : ""} hidden`}
-                    onClick={flipCard}>{isFlipped ? question[6].answer : question[6].question}</div>
                 <div className="m-4">
-                    <button className="p-5 mr-2" onClick={nextCard}>Next</button>
-                    <button className="p-5 ml-2" onClick={prevCard}>Previous</button>
+                    <button className="p-5 mr-2" onClick={onPrev}>Previous</button>
+                    <button className="p-5 ml-2" onClick={onNext}>Next</button>
                 </div>
             </section>
         </>
@@ -114,12 +82,30 @@ const Questions = ({ question }) => {
 const Card = () => {
     // Bringing the array of questions into state
     const [question, setQuestion] = useState(questions)
+    // Used to track the current question
+    const [questionNum, setQuestionNum] = useState(0)
+
+    const nextCard = () => {
+        if (questionNum < numOfCards - 1) {
+            setQuestionNum(questionNum + 1)
+        }
+    }
+
+    const prevCard = () => {
+        if (questionNum > 0) {
+            setQuestionNum(questionNum - 1)
+        }
+    }
 
     const numOfCards = question.length
     return (
         <>
             <h2>Number of FlashCards: {numOfCards}</h2>
-            <Questions question={question} onSetQuestion={setQuestion} />
+            <Questions
+                question={question[questionNum]}
+                onSetQuestion={setQuestion}
+                onNext={nextCard}
+                onPrev={prevCard} />
         </>
     )
 }
