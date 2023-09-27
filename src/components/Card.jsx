@@ -82,7 +82,7 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped }) => {
                             </p>
                         </> :
                         <>
-                            <div >
+                            <div>
                                 <p className="p-5">
                                     {question.question}
                                 </p>

@@ -18,13 +18,13 @@ The following **required** functionality is completed:
 
 The following **optional** features are implemented:
 
-- [ ] Cards contains images in addition to or in place of text
+- [x] Cards contains images in addition to or in place of text
 - [x] Cards have different visual styles such as color based on their category
 - [x] _visual style implemented_
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you added to improve the site's functionality!
+- [x] Made sure to add lazy loading for the images!
 
 ## Video Walkthrough
 
@@ -36,14 +36,10 @@ Here's a walkthrough of implemented required features:
 
 GIF created with ...
 
-<!-- Recommended tools:
-[Kap](https://getkap.co/) for macOS
-[ScreenToGif](https://www.screentogif.com/) for Windows
-[peek](https://github.com/phw/peek) for Linux. -->
-
 ## Notes
 
-Describe any challenges encountered while building the app.
+I had a few challenges with figuring out how to flip the card and how to shuffle the cards randomly. I had to do research on how to do this. 
+
 
 ## License
 
