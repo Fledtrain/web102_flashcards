@@ -73,7 +73,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  background-image: url("./public/background2.webp");
+  background-image: url("../public/background2.webp");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
