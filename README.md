@@ -30,16 +30,13 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented required features:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='./public/project2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
-<!-- Replace this with whatever GIF tool you used! -->
-
-GIF created with ...
+GIF created with LICEcap
 
 ## Notes
 
-I had a few challenges with figuring out how to flip the card and how to shuffle the cards randomly. I had to do research on how to do this. 
-
+I had a few challenges with figuring out how to flip the card and how to shuffle the cards randomly. I had to do research on how to do this.
 
 ## License
 
