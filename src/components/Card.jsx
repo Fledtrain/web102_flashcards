@@ -25,7 +25,7 @@ const questions = [
     },
     {
         id: 3,
-        question: "What game is this character from? He is the main protagonist of the Legend of Zelda series.",
+        question: "What character is this? He is the main protagonist of the Legend of Zelda series.",
         img: "Link.webp",
         answer: "Link",
         difficulty: "easy"
