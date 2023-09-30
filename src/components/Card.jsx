@@ -63,21 +63,20 @@ const questions = [
 
 const Questions = ({ question, onNext, onPrev, onFlip, isFlipped, onShuffle }) => {
     const [answer, setAnswer] = useState("")
+    const [color, setColor] = useState("")
 
     const handleChange = (e) => {
-        console.log(e.target.value)
         setAnswer(e.target.value)
     }
 
     const handleSubmit = (e) => {
         e.preventDefault()
         if (answer === question.answer) {
-            console.log("Correct!")
+            setColor(answer === question.answer && "border-purple-900 border-4")
         } else {
-            console.log("Incorrect!")
+            setColor(answer !== question.answer && "border-4 border-red-900")
         }
         setAnswer("")
-
     }
 
 
@@ -119,15 +118,19 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped, onShuffle }) =
                 </div>
                 <div className="m-4">
                     <form className="m-4">
-                        <input type="text" onChange={handleChange} className={`
-                        ${answer === question.answer && " border-purple-900 border-4"} 
-                        ${answer !== question.answer && "border-4 border-red-800"}`
-                        } />
+                        <>Guess the Answer here: </>
+                        <input
+                            type="text"
+                            name="answer"
+                            onChange={handleChange}
+                            placeholder="Enter Answer Here..."
+                            className={`${color}`
+                            } />
                         <button
-                            className="bg-slate-500 p-5 ml-2 active:bg-slate-500 font-semibold uppercase"
+                            disabled={answer === ""}
+                            className={`bg-slate-500 p-5 ml-2 active:bg-slate-500 font-semibold uppercase`}
                             onClick={handleSubmit}>Submit</button>
                     </form>
-                    {/* <button className="p-5 mr-2 hover:bg-slate-500 active:bg-slate-600 " onClick={onPrev}>Previous</button> */}
                     <button
                         className={`
                         ${question.difficulty === "hard" && "bg-red-800"}
