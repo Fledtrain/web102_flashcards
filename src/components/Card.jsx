@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
+// import Button from "./Button";
 
 const questions = [
     {
@@ -60,7 +61,26 @@ const questions = [
  * @param  {function(): number} onPrev Subtract id by 1
  */
 
-const Questions = ({ question, onNext, onPrev, onFlip, isFlipped }) => {
+const Questions = ({ question, onNext, onPrev, onFlip, isFlipped, onShuffle }) => {
+    const [answer, setAnswer] = useState("")
+
+    const handleChange = (e) => {
+        console.log(e.target.value)
+        setAnswer(e.target.value)
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if (answer === question.answer) {
+            console.log("Correct!")
+        } else {
+            console.log("Incorrect!")
+        }
+        setAnswer("")
+
+    }
+
+
     return (
         <>
             <section className="mt-5 ">
@@ -83,7 +103,7 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped }) => {
                         </> :
                         <>
                             <div>
-                                <p className="p-5">
+                                <p className="p-5 font-semibold">
                                     {question.question}
                                 </p>
                                 <img
@@ -98,14 +118,37 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped }) => {
                     }
                 </div>
                 <div className="m-4">
+                    <form className="m-4">
+                        <input type="text" onChange={handleChange} className={`
+                        ${answer === question.answer && " border-purple-900 border-4"} 
+                        ${answer !== question.answer && "border-4 border-red-800"}`
+                        } />
+                        <button
+                            className="bg-slate-500 p-5 ml-2 active:bg-slate-500 font-semibold uppercase"
+                            onClick={handleSubmit}>Submit</button>
+                    </form>
                     {/* <button className="p-5 mr-2 hover:bg-slate-500 active:bg-slate-600 " onClick={onPrev}>Previous</button> */}
                     <button
                         className={`
                         ${question.difficulty === "hard" && "bg-red-800"}
                         ${question.difficulty === "medium" && "bg-purple-800"}
                         ${question.difficulty === "easy" && "bg-green-800"} 
-                        p-5 ml-2 active:bg-slate-500 font-semibold`}
-                        onClick={onNext}>Next</button>
+                        p-5 ml-2 active:bg-slate-500 font-semibold uppercase`}
+                        onClick={onPrev}>back</button>
+                    <button
+                        className={`
+                        ${question.difficulty === "hard" && "bg-red-800"}
+                        ${question.difficulty === "medium" && "bg-purple-800"}
+                        ${question.difficulty === "easy" && "bg-green-800"} 
+                        p-5 ml-2 active:bg-slate-500 font-semibold uppercase`}
+                        onClick={onNext}>next</button>
+                    <button
+                        className={`
+                        ${question.difficulty === "hard" && "bg-red-800"}
+                        ${question.difficulty === "medium" && "bg-purple-800"}
+                        ${question.difficulty === "easy" && "bg-green-800"} 
+                        p-5 ml-2 active:bg-slate-500 font-semibold uppercase`}
+                        onClick={onShuffle}>shuffle</button>
                 </div>
             </section>
         </>
@@ -133,6 +176,13 @@ const Card = () => {
      * @returns {number}
     */
     const nextCard = () => {
+        if (questionNum < numOfCards - 1) {
+            setQuestionNum(questionNum + 1)
+            setIsFlipped(false)
+        }
+    }
+
+    const onShuffle = () => {
         let newRandomNum;
         do {
             newRandomNum = Math.floor(Math.random() * 7)
@@ -141,7 +191,6 @@ const Card = () => {
         setRandomQuestionNum(newRandomNum)
         setQuestionNum(newRandomNum)
         setIsFlipped(false)
-
     }
     /**Decrements Question Number
      * @returns {number} 
@@ -160,6 +209,7 @@ const Card = () => {
                 onSetQuestion={setQuestion}
                 onNext={nextCard}
                 onPrev={prevCard}
+                onShuffle={onShuffle}
                 onFlip={flipCard}
                 isFlipped={isFlipped}
             />
