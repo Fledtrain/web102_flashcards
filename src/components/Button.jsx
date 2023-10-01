@@ -7,7 +7,7 @@ const Button = ({ question, onClick, children }) => {
             ${question.difficulty === "hard" && "bg-red-800"}
             ${question.difficulty === "medium" && "bg-purple-800"}
             ${question.difficulty === "easy" && "bg-green-800"} 
-            p-5 ml-2 active:bg-slate-500 font-semibold uppercase`}
+            sm:p-5 p-3 ml-2 active:bg-slate-500 font-semibold uppercase`}
                 onClick={onClick} >{children}
             </button>
         </>

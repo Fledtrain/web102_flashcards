@@ -116,7 +116,7 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped, onShuffle }) =
                     }
                 </div>
                 <div className="m-4">
-                    <form className="m-2">
+                    <form className="m-1 sm:m-2">
                         <>Guess the Answer here: </>
                         <input
                             type="text"
@@ -124,10 +124,10 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped, onShuffle }) =
                             value={answer}
                             onChange={handleChange}
                             placeholder="Enter Answer Here..."
-                            className={`${color} text-lg bg-slate-900`} />
+                            className={`${color} sm:text-lg text-md bg-slate-900`} />
                         <button
                             disabled={answer === ""}
-                            className={`bg-slate-500 p-5 ml-2 active:bg-slate-500 font-semibold uppercase`}
+                            className={`bg-slate-500 p-3 sm:p-5 ml-1 active:bg-slate-500 font-semibold uppercase`}
                             onClick={handleSubmit}>Submit</button>
                     </form>
                     <Button question={question} onClick={onPrev}>back</Button>
