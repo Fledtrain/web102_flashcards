@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import Button from "./Button";
+import Form from "./Form";
 
 const questions = [
     {
@@ -122,20 +123,7 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped, onShuffle }) =
                     }
                 </div>
                 <div className="m-4">
-                    <form className="m-1 sm:m-2">
-                        <>Guess the Answer here: </>
-                        <input
-                            type="text"
-                            name="answer"
-                            value={answer}
-                            onChange={handleChange}
-                            placeholder="Enter Answer Here..."
-                            className={`${color} sm:text-lg text-md bg-slate-900`} />
-                        <button
-                            disabled={answer === ""}
-                            className={`bg-slate-500 p-3 sm:p-5 ml-1 active:bg-slate-500 font-semibold uppercase`}
-                            onClick={handleSubmit}>Submit</button>
-                    </form>
+                    <Form answer={answer} handleChange={handleChange} color={color} handleSubmit={handleSubmit} />
                     <Button question={question} onClick={onPrev}>back</Button>
                     <Button question={question} onClick={onNext}>next</Button>
                     <Button question={question} onClick={onShuffle}>shuffle</Button>
