@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-// import Button from "./Button";
+import Button from "./Button";
 
 const questions = [
     {
@@ -131,27 +131,9 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped, onShuffle }) =
                             className={`bg-slate-500 p-5 ml-2 active:bg-slate-500 font-semibold uppercase`}
                             onClick={handleSubmit}>Submit</button>
                     </form>
-                    <button
-                        className={`
-                        ${question.difficulty === "hard" && "bg-red-800"}
-                        ${question.difficulty === "medium" && "bg-purple-800"}
-                        ${question.difficulty === "easy" && "bg-green-800"} 
-                        p-5 ml-2 active:bg-slate-500 font-semibold uppercase`}
-                        onClick={onPrev}>back</button>
-                    <button
-                        className={`
-                        ${question.difficulty === "hard" && "bg-red-800"}
-                        ${question.difficulty === "medium" && "bg-purple-800"}
-                        ${question.difficulty === "easy" && "bg-green-800"} 
-                        p-5 ml-2 active:bg-slate-500 font-semibold uppercase`}
-                        onClick={onNext}>next</button>
-                    <button
-                        className={`
-                        ${question.difficulty === "hard" && "bg-red-800"}
-                        ${question.difficulty === "medium" && "bg-purple-800"}
-                        ${question.difficulty === "easy" && "bg-green-800"} 
-                        p-5 ml-2 active:bg-slate-500 font-semibold uppercase`}
-                        onClick={onShuffle}>shuffle</button>
+                    <Button question={question} onClick={onPrev}>back</Button>
+                    <Button question={question} onClick={onNext}>next</Button>
+                    <Button question={question} onClick={onShuffle}>shuffle</Button>
                 </div>
             </section>
         </>
