@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 
 const Form = ({ answer, handleChange, color, handleSubmit }) => {
     return (
