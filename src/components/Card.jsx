@@ -73,10 +73,10 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped, onShuffle }) =
         e.preventDefault()
         if (answer === question.answer) {
             setColor(answer === question.answer && "border-purple-900 border-4")
+            setAnswer("")
         } else {
             setColor(answer !== question.answer && "border-4 border-red-900")
         }
-        setAnswer("")
     }
 
 
@@ -110,22 +110,21 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped, onShuffle }) =
                                     className="rounded-2xl h-48 items-center justify-center m-auto"
                                     src={question.img}
                                     alt="No Hints"
-                                    loading="lazy"
                                 />
                             </div>
                         </>
                     }
                 </div>
                 <div className="m-4">
-                    <form className="m-4">
+                    <form className="m-2">
                         <>Guess the Answer here: </>
                         <input
                             type="text"
                             name="answer"
+                            value={answer}
                             onChange={handleChange}
                             placeholder="Enter Answer Here..."
-                            className={`${color}`
-                            } />
+                            className={`${color} text-lg bg-slate-900`} />
                         <button
                             disabled={answer === ""}
                             className={`bg-slate-500 p-5 ml-2 active:bg-slate-500 font-semibold uppercase`}
