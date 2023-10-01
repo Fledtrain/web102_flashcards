@@ -64,6 +64,8 @@ const questions = [
 const Questions = ({ question, onNext, onPrev, onFlip, isFlipped, onShuffle }) => {
     const [answer, setAnswer] = useState("")
     const [color, setColor] = useState("")
+    const [streak, setStreak] = useState(0)
+    const [longestStreak, setLongestStreak] = useState(0)
 
     const handleChange = (e) => {
         setAnswer(e.target.value)
@@ -73,9 +75,12 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped, onShuffle }) =
         e.preventDefault()
         if (answer === question.answer) {
             setColor(answer === question.answer && "border-purple-900 border-4")
+            setStreak(streak + 1)
             setAnswer("")
         } else {
             setColor(answer !== question.answer && "border-4 border-red-900")
+            setLongestStreak(streak > longestStreak ? streak : longestStreak)
+            setStreak(0)
         }
     }
 
@@ -83,6 +88,7 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped, onShuffle }) =
     return (
         <>
             <section className="mt-5 ">
+                <p className="pb-3 text-black">Current Streak: {streak}, Longest Streak: {longestStreak}</p>
                 <div
                     id={question.id}
                     className=
