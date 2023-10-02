@@ -1,6 +1,11 @@
 /* eslint-disable react/prop-types */
 
 const Form = ({ answer, handleChange, color, handleSubmit }) => {
+
+    // A user's answer may be counted as correct even when it is slightly different from the target answer
+
+
+
     return (
         <>
             <form className="m-1 sm:m-2 flex flex-row text-center justify-center ">

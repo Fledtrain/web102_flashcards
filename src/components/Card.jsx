@@ -58,8 +58,9 @@ const questions = [
 /**Component for displaying questions and answers 
  * @component
  * @param  {object} question 
- * @param  {function(): number} onNext Increment id randomly
+ * @param  {function(): number} onShuffle Increment id randomly
  * @param  {function(): number} onPrev Subtract id by 1
+ * @param  {function(): number} onPrev Increment id by 1
  */
 
 const Questions = ({ question, onNext, onPrev, onFlip, isFlipped, onShuffle }) => {
@@ -89,7 +90,7 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped, onShuffle }) =
     return (
         <>
             <section className="mt-5 ">
-                <p className="pb-3 text-black">Current Streak: {streak}, Longest Streak: {longestStreak}</p>
+                <p className="pb-2 text-slate-900 text-xl font-semibold">Current Streak: {streak}, Longest Streak: {longestStreak}</p>
                 <div
                     id={question.id}
                     className=
@@ -181,7 +182,7 @@ const Card = () => {
     }
     return (
         <>
-            <h2 className="text-slate-900 text-xl">Number of FlashCards: {numOfCards}</h2>
+            <h2 className="text-slate-900 text-2xl font-semibold">Number of FlashCards: {numOfCards}</h2>
             <Questions
                 question={question[questionNum]}
                 onSetQuestion={setQuestion}
