@@ -9,7 +9,7 @@ const Form = ({ answer, handleChange, color, handleSubmit }) => {
     return (
         <>
             <form className="m-1 sm:m-2 flex flex-row text-center justify-center ">
-                <p className="flex justify-center items-center mr-1 text-ellipsis text-sm sm:text-base">Guess the Answer here: </p>
+                <p className="flex justify-center items-center font-semibold mr-1 text-ellipsis text-sm sm:text-base">Guess the Answer here: </p>
                 <input
                     type="text"
                     name="answer"
