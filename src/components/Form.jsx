@@ -16,7 +16,7 @@ const Form = ({ answer, handleChange, color, handleSubmit }) => {
                     value={answer}
                     onChange={handleChange}
                     placeholder="Enter Answer Here..."
-                    className={`${color} sm:text-lg text-md bg-slate-900`} />
+                    className={`${color} text-center sm:text-lg text-md bg-slate-800`} />
                 <button
                     disabled={answer === ""}
                     className={`bg-slate-500 p-3 sm:p-5 ml-1 active:bg-slate-500 font-semibold uppercase`}

@@ -80,7 +80,7 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you added to improve the site's functionality!
+- [x] Made sure text was easily readable on both phone and desktop, as well as fully responsive!
 
 ## Video Walkthrough
 
