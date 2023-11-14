@@ -1,6 +1,13 @@
+//@ts-check
+
+// eslint-disable-next-line no-unused-vars
+import React from 'react'
 import './App.css'
 import Card from './components/Card'
 
+/** Returns the App component
+ * @returns {React.JSX.Element}
+ */
 const App = () => {
 
   return (
