@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
+import Button from "./Button";
+import Form from "./Form";
 
 const questions = [
     {
@@ -56,14 +58,84 @@ const questions = [
 /**Component for displaying questions and answers 
  * @component
  * @param  {object} question 
- * @param  {function(): number} onNext Increment id randomly
+ * @param  {function(): number} onShuffle Increment id randomly
  * @param  {function(): number} onPrev Subtract id by 1
+ * @param  {function(): number} onPrev Increment id by 1
  */
 
-const Questions = ({ question, onNext, onPrev, onFlip, isFlipped }) => {
+const Questions = ({ question, onNext, onPrev, onFlip, isFlipped, onShuffle }) => {
+    const [answer, setAnswer] = useState("")
+    const [color, setColor] = useState("")
+    const [streak, setStreak] = useState(0)
+    const [longestStreak, setLongestStreak] = useState(0)
+
+    const calculateLevenshteinDistance = (a, b) => {
+        if (a.length === 0) return b.length;
+        if (b.length === 0) return a.length;
+        const matrix = [];
+        // Initialize matrix
+        for (let i = 0; i <= b.length; i++) {
+            matrix[i] = [i];
+        }
+        for (let j = 0; j <= a.length; j++) {
+            matrix[0][j] = j;
+        }
+        // Calculate Levenshtein distance
+        for (let i = 1; i <= b.length; i++) {
+            for (let j = 1; j <= a.length; j++) {
+                const cost = a[j - 1] === b[i - 1] ? 0 : 1;
+                matrix[i][j] = Math.min(
+                    matrix[i - 1][j] + 1, // Deletion
+                    matrix[i][j - 1] + 1, // Insertion
+                    matrix[i - 1][j - 1] + cost // Substitution
+                );
+            }
+        }
+        return matrix[b.length][a.length];
+    };
+
+    const isAnswerPartiallyCorrect = () => {
+        // Define a threshold for partial correctness
+        const partialCorrectThreshold = 2; // Adjust this threshold as needed
+
+        // Calculate Levenshtein distance between user's answer and the correct answer
+        const distance = calculateLevenshteinDistance(
+            answer.toLowerCase(), // Convert both answers to lowercase for case-insensitive comparison
+            question.answer.toLowerCase()
+        );
+        // Check if the Levenshtein distance is within the threshold
+        return distance <= partialCorrectThreshold;
+    };
+
+    const handleChange = (e) => {
+        setAnswer(e.target.value)
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const isNumericAnswer = !isNaN(parseFloat(answer)) && isFinite(answer);
+        if (isNumericAnswer && parseFloat(answer) === parseFloat(question.answer)) {
+            // Numeric answer matches exactly
+            setColor(answer === question.answer && "border-purple-900 border-4");
+            setStreak(streak + 1);
+            setAnswer("");
+        } else if (!isNumericAnswer && (answer.toLowerCase() === question.answer.toLowerCase() || isAnswerPartiallyCorrect())) {
+            // Non-numeric answer is either an exact match or partially correct
+            setColor(answer === question.answer && "border-purple-900 border-4");
+            setStreak(streak + 1);
+            setAnswer("");
+        } else {
+            setColor("border-4 border-red-900");
+            setLongestStreak(streak > longestStreak ? streak : longestStreak);
+            setStreak(0);
+        }
+    };
+
+
     return (
         <>
             <section className="mt-5 ">
+                <p className="pb-2 text-slate-900 text-xl font-semibold">Current Streak: {streak}, Longest Streak: {longestStreak}</p>
                 <div
                     id={question.id}
                     className=
@@ -83,7 +155,7 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped }) => {
                         </> :
                         <>
                             <div>
-                                <p className="p-5">
+                                <p className="p-5 font-semibold">
                                     {question.question}
                                 </p>
                                 <img
@@ -91,21 +163,16 @@ const Questions = ({ question, onNext, onPrev, onFlip, isFlipped }) => {
                                     className="rounded-2xl h-48 items-center justify-center m-auto"
                                     src={question.img}
                                     alt="No Hints"
-                                    loading="lazy"
                                 />
                             </div>
                         </>
                     }
                 </div>
                 <div className="m-4">
-                    {/* <button className="p-5 mr-2 hover:bg-slate-500 active:bg-slate-600 " onClick={onPrev}>Previous</button> */}
-                    <button
-                        className={`
-                        ${question.difficulty === "hard" && "bg-red-800"}
-                        ${question.difficulty === "medium" && "bg-purple-800"}
-                        ${question.difficulty === "easy" && "bg-green-800"} 
-                        p-5 ml-2 active:bg-slate-500 font-semibold`}
-                        onClick={onNext}>Next</button>
+                    <Form answer={answer} handleChange={handleChange} color={color} handleSubmit={handleSubmit} />
+                    <Button question={question} onClick={onPrev}>back</Button>
+                    <Button question={question} onClick={onNext}>next</Button>
+                    <Button question={question} onClick={onShuffle}>shuffle</Button>
                 </div>
             </section>
         </>
@@ -133,6 +200,13 @@ const Card = () => {
      * @returns {number}
     */
     const nextCard = () => {
+        if (questionNum < numOfCards - 1) {
+            setQuestionNum(questionNum + 1)
+            setIsFlipped(false)
+        }
+    }
+
+    const onShuffle = () => {
         let newRandomNum;
         do {
             newRandomNum = Math.floor(Math.random() * 7)
@@ -141,7 +215,6 @@ const Card = () => {
         setRandomQuestionNum(newRandomNum)
         setQuestionNum(newRandomNum)
         setIsFlipped(false)
-
     }
     /**Decrements Question Number
      * @returns {number} 
@@ -154,12 +227,13 @@ const Card = () => {
     }
     return (
         <>
-            <h2 className="text-slate-900 text-xl">Number of FlashCards: {numOfCards}</h2>
+            <h2 className="text-slate-900 text-2xl font-semibold">Number of FlashCards: {numOfCards}</h2>
             <Questions
                 question={question[questionNum]}
                 onSetQuestion={setQuestion}
                 onNext={nextCard}
                 onPrev={prevCard}
+                onShuffle={onShuffle}
                 onFlip={flipCard}
                 isFlipped={isFlipped}
             />
